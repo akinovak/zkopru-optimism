@@ -108,7 +108,7 @@ contract BurnAuction is IConsensusProvider, IBurnAuction {
             // Refund the previous high bidder
             pendingBalances[prevHighBid.owner] += prevHighBid.amount;
         }
-        highestBidPerRound[roundIndex] = Bid(msg.sender, uint232(amount));
+        highestBidPerRound[roundIndex] = Bid(payable(msg.sender), uint232(amount));
         pendingBalances[msg.sender] -= amount;
         emit NewHighBid(roundIndex, msg.sender, amount);
     }
@@ -252,7 +252,7 @@ contract BurnAuction is IConsensusProvider, IBurnAuction {
      * @dev Refund shortcut for msg.sender.
      **/
     function refund() public override {
-        refund(msg.sender);
+        refund(payable(msg.sender));
     }
 
     /**

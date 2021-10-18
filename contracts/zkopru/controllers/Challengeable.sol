@@ -104,7 +104,7 @@ contract Challengeable is Storage {
     }
 
     function _skipGasLimitCheck(bytes4 sig) internal pure returns (bool) {
-        if (sig == UtxoTreeValidator(0).validateUTXORoot.selector) {
+        if (sig == UtxoTreeValidator(address(0)).validateUTXORoot.selector) {
             return true;
         } else {
             return false;

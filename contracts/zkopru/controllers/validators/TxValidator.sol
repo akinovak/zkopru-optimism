@@ -298,13 +298,13 @@ contract TxValidator is Storage, ITxValidator {
             inputs[index++] = uint256(transaction.outflow[i].outflowType);
         }
         for (uint256 i = 0; i < numOfOutflow; i++) {
-            inputs[index++] = uint256(transaction.outflow[i].publicData.to);
+            inputs[index++] = uint256(uint160(transaction.outflow[i].publicData.to));
         }
         for (uint256 i = 0; i < numOfOutflow; i++) {
             inputs[index++] = uint256(transaction.outflow[i].publicData.eth);
         }
         for (uint256 i = 0; i < numOfOutflow; i++) {
-            inputs[index++] = uint256(transaction.outflow[i].publicData.token);
+            inputs[index++] = uint256(uint160(transaction.outflow[i].publicData.token));
         }
         for (uint256 i = 0; i < numOfOutflow; i++) {
             inputs[index++] = uint256(transaction.outflow[i].publicData.amount);

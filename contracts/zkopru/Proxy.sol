@@ -44,36 +44,36 @@ contract Proxy is Storage {
     receive() external payable {}
 
     function _connectConfigurable(address addr) internal virtual {
-        _connect(addr, IConfigurable.setMaxBlockSize.selector);
-        _connect(addr, IConfigurable.setMaxValidationGas.selector);
-        _connect(addr, IConfigurable.setChallengePeriod.selector);
-        _connect(addr, IConfigurable.setMinimumStake.selector);
-        _connect(addr, IConfigurable.setReferenceDepth.selector);
-        _connect(addr, IConfigurable.setConsensusProvider.selector);
+        _connect(addr, IConfigurable(address(0)).setMaxBlockSize.selector);
+        _connect(addr, IConfigurable(address(0)).setMaxValidationGas.selector);
+        _connect(addr, IConfigurable(address(0)).setChallengePeriod.selector);
+        _connect(addr, IConfigurable(address(0)).setMinimumStake.selector);
+        _connect(addr, IConfigurable(address(0)).setReferenceDepth.selector);
+        _connect(addr, IConfigurable(address(0)).setConsensusProvider.selector);
     }
 
     function _connectCoordinatable(address addr) internal {
-        _connect(addr, ICoordinatable.register.selector);
-        _connect(addr, ICoordinatable.stake.selector);
-        _connect(addr, ICoordinatable.deregister.selector);
-        _connect(addr, ICoordinatable.safePropose.selector);
-        _connect(addr, ICoordinatable.propose.selector);
-        _connect(addr, ICoordinatable.finalize.selector);
-        _connect(addr, ICoordinatable.commitMassDeposit.selector);
-        _connect(addr, ICoordinatable.withdrawReward.selector);
-        _connect(addr, ICoordinatable.registerERC20.selector);
-        _connect(addr, ICoordinatable.registerERC721.selector);
+        _connect(addr, ICoordinatable(address(0)).register.selector);
+        _connect(addr, ICoordinatable(address(0)).stake.selector);
+        _connect(addr, ICoordinatable(address(0)).deregister.selector);
+        _connect(addr, ICoordinatable(address(0)).safePropose.selector);
+        _connect(addr, ICoordinatable(address(0)).propose.selector);
+        _connect(addr, ICoordinatable(address(0)).finalize.selector);
+        _connect(addr, ICoordinatable(address(0)).commitMassDeposit.selector);
+        _connect(addr, ICoordinatable(address(0)).withdrawReward.selector);
+        _connect(addr, ICoordinatable(address(0)).registerERC20.selector);
+        _connect(addr, ICoordinatable(address(0)).registerERC721.selector);
     }
 
     function _connectUserInteractable(address addr) internal {
-        _connect(addr, IUserInteractable.deposit.selector);
-        _connect(addr, IUserInteractable.withdraw.selector);
-        _connect(addr, IUserInteractable.payInAdvance.selector);
+        _connect(addr, IUserInteractable(address(0)).deposit.selector);
+        _connect(addr, IUserInteractable(address(0)).withdraw.selector);
+        _connect(addr, IUserInteractable(address(0)).payInAdvance.selector);
     }
 
     function _connectMigratable(address addr) internal virtual {
-        _connect(addr, IMigratable.transfer.selector);
-        _connect(addr, IMigratable.migrateFrom.selector);
+        _connect(addr, IMigratable(address(0)).transfer.selector);
+        _connect(addr, IMigratable(address(0)).migrateFrom.selector);
     }
 
     function _connectChallengeable(
@@ -86,52 +86,52 @@ contract Proxy is Storage {
         address nullifierTreeValidator,
         address txValidator
     ) internal virtual {
-        _connect(challengeable, IDepositValidator.validateMassDeposit.selector);
-        _connect(challengeable, IHeaderValidator.validateDepositRoot.selector);
-        _connect(challengeable, IHeaderValidator.validateTxRoot.selector);
-        _connect(challengeable, IHeaderValidator.validateMigrationRoot.selector);
-        _connect(challengeable, IHeaderValidator.validateTotalFee.selector);
-        _connect(challengeable, IMigrationValidator.validateDuplicatedMigrations.selector);
-        _connect(challengeable, IMigrationValidator.validateEthMigration.selector);
-        _connect(challengeable, IMigrationValidator.validateERC20Migration.selector);
-        _connect(challengeable, IMigrationValidator.validateMergedLeaves.selector);
-        _connect(challengeable, IMigrationValidator.validateMigrationFee.selector);
-        _connect(challengeable, IMigrationValidator.validateTokenRegistration.selector);
-        _connect(challengeable, IMigrationValidator.validateMissedMassMigration.selector);
-        _connect(challengeable, IUtxoTreeValidator.validateUTXOIndex.selector);
-        _connect(challengeable, IUtxoTreeValidator.validateUTXORoot.selector);
-        _connect(challengeable, IWithdrawalTreeValidator.validateWithdrawalIndex.selector);
-        _connect(challengeable, IWithdrawalTreeValidator.validateWithdrawalRoot.selector);
-        _connect(challengeable, INullifierTreeValidator.validateNullifierRollUp.selector);
-        _connect(challengeable, ITxValidator.validateInclusion.selector);
-        _connect(challengeable, ITxValidator.validateOutflow.selector);
-        _connect(challengeable, ITxValidator.validateAtomicSwap.selector);
-        _connect(challengeable, ITxValidator.validateUsedNullifier.selector);
-        _connect(challengeable, ITxValidator.validateDuplicatedNullifier.selector);
-        _connect(challengeable, ITxValidator.validateSNARK.selector);
-        _connectValidator(depositValidator, IDepositValidator.validateMassDeposit.selector);
-        _connectValidator(headerValidator, IHeaderValidator.validateDepositRoot.selector);
-        _connectValidator(headerValidator, IHeaderValidator.validateTxRoot.selector);
-        _connectValidator(headerValidator, IHeaderValidator.validateMigrationRoot.selector);
-        _connectValidator(headerValidator, IHeaderValidator.validateTotalFee.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateDuplicatedMigrations.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateEthMigration.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateERC20Migration.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateMergedLeaves.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateMigrationFee.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateTokenRegistration.selector);
-        _connectValidator(migrationValidator, IMigrationValidator.validateMissedMassMigration.selector);
-        _connectValidator(utxoTreeValidator, IUtxoTreeValidator.validateUTXOIndex.selector);
-        _connectValidator(utxoTreeValidator, IUtxoTreeValidator.validateUTXORoot.selector);
-        _connectValidator(withdrawalTreeValidator, IWithdrawalTreeValidator.validateWithdrawalIndex.selector);
-        _connectValidator(withdrawalTreeValidator, IWithdrawalTreeValidator.validateWithdrawalRoot.selector);
-        _connectValidator(nullifierTreeValidator, INullifierTreeValidator.validateNullifierRollUp.selector);
-        _connectValidator(txValidator, ITxValidator.validateInclusion.selector);
-        _connectValidator(txValidator, ITxValidator.validateOutflow.selector);
-        _connectValidator(txValidator, ITxValidator.validateAtomicSwap.selector);
-        _connectValidator(txValidator, ITxValidator.validateUsedNullifier.selector);
-        _connectValidator(txValidator, ITxValidator.validateDuplicatedNullifier.selector);
-        _connectValidator(txValidator, ITxValidator.validateSNARK.selector);
+        _connect(challengeable, IDepositValidator(address(0)).validateMassDeposit.selector);
+        _connect(challengeable, IHeaderValidator(address(0)).validateDepositRoot.selector);
+        _connect(challengeable, IHeaderValidator(address(0)).validateTxRoot.selector);
+        _connect(challengeable, IHeaderValidator(address(0)).validateMigrationRoot.selector);
+        _connect(challengeable, IHeaderValidator(address(0)).validateTotalFee.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateDuplicatedMigrations.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateEthMigration.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateERC20Migration.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateMergedLeaves.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateMigrationFee.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateTokenRegistration.selector);
+        _connect(challengeable, IMigrationValidator(address(0)).validateMissedMassMigration.selector);
+        _connect(challengeable, IUtxoTreeValidator(address(0)).validateUTXOIndex.selector);
+        _connect(challengeable, IUtxoTreeValidator(address(0)).validateUTXORoot.selector);
+        _connect(challengeable, IWithdrawalTreeValidator(address(0)).validateWithdrawalIndex.selector);
+        _connect(challengeable, IWithdrawalTreeValidator(address(0)).validateWithdrawalRoot.selector);
+        _connect(challengeable, INullifierTreeValidator(address(0)).validateNullifierRollUp.selector);
+        _connect(challengeable, ITxValidator(address(0)).validateInclusion.selector);
+        _connect(challengeable, ITxValidator(address(0)).validateOutflow.selector);
+        _connect(challengeable, ITxValidator(address(0)).validateAtomicSwap.selector);
+        _connect(challengeable, ITxValidator(address(0)).validateUsedNullifier.selector);
+        _connect(challengeable, ITxValidator(address(0)).validateDuplicatedNullifier.selector);
+        _connect(challengeable, ITxValidator(address(0)).validateSNARK.selector);
+        _connectValidator(depositValidator, IDepositValidator(address(0)).validateMassDeposit.selector);
+        _connectValidator(headerValidator, IHeaderValidator(address(0)).validateDepositRoot.selector);
+        _connectValidator(headerValidator, IHeaderValidator(address(0)).validateTxRoot.selector);
+        _connectValidator(headerValidator, IHeaderValidator(address(0)).validateMigrationRoot.selector);
+        _connectValidator(headerValidator, IHeaderValidator(address(0)).validateTotalFee.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateDuplicatedMigrations.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateEthMigration.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateERC20Migration.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateMergedLeaves.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateMigrationFee.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateTokenRegistration.selector);
+        _connectValidator(migrationValidator, IMigrationValidator(address(0)).validateMissedMassMigration.selector);
+        _connectValidator(utxoTreeValidator, IUtxoTreeValidator(address(0)).validateUTXOIndex.selector);
+        _connectValidator(utxoTreeValidator, IUtxoTreeValidator(address(0)).validateUTXORoot.selector);
+        _connectValidator(withdrawalTreeValidator, IWithdrawalTreeValidator(address(0)).validateWithdrawalIndex.selector);
+        _connectValidator(withdrawalTreeValidator, IWithdrawalTreeValidator(address(0)).validateWithdrawalRoot.selector);
+        _connectValidator(nullifierTreeValidator, INullifierTreeValidator(address(0)).validateNullifierRollUp.selector);
+        _connectValidator(txValidator, ITxValidator(address(0)).validateInclusion.selector);
+        _connectValidator(txValidator, ITxValidator(address(0)).validateOutflow.selector);
+        _connectValidator(txValidator, ITxValidator(address(0)).validateAtomicSwap.selector);
+        _connectValidator(txValidator, ITxValidator(address(0)).validateUsedNullifier.selector);
+        _connectValidator(txValidator, ITxValidator(address(0)).validateDuplicatedNullifier.selector);
+        _connectValidator(txValidator, ITxValidator(address(0)).validateSNARK.selector);
     }
 
     function _connect(address to, bytes4 sig) internal {

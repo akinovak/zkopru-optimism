@@ -35,6 +35,6 @@ contract Configurable is Storage {
 
     function setConsensusProvider(address provider) public onlyOwner {
         consensusProvider = provider;
-        emit Update("consensusProvider", uint256(provider));
+        emit Update("consensusProvider", uint256(uint160(provider)));
     }
 }
