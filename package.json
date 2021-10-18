@@ -4,8 +4,9 @@
   "description": "zkopru contracts on optimism",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "npx hardhat compile"
+    "compile": "npx hardhat compile",
+    "test-optimism": "npx hardhat --network optimistic test",
+    "deploy-optimism": "npx hardhat run scripts/deploy.ts --network optimistic"
   },
   "repository": {
     "type": "git",
